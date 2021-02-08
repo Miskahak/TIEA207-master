@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TIEA207</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="StyleSheet" href="tyylitiedosto.css" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+	<div class="navigation">
+		<a id="topbar" class="active">
+			<div id="title"> Team:</div>
+			<div id="debuginfo"></div>
+		</a>
+		<div id="links">
+			<a id="selectusername">Valitse käyttäjätunnus</a>
+			<a id="openroomlogin">Luo/Liity huoneeseen</a>
+			<a id="openteams">Ryhmät</a>
+			<a id="editmap">Muokkaa karttaa</a>
+			<a id="settings">Debug</a>
+			<a id="toolstoggle">Piirtotyökalut</a>
+			<a id="chattoggle">Chat</a>
+		</div>
+		<a id="hamburger" class="icon">
+			<i class="fa fa-bars"></i> <!-- cloudflaresta importattu ikoni ^^^^ pitää ehkä korvata toisella -->
+		</a>
+	</div>
+    
+	
+	<div id="map">
+		<div id="flexLR"> <!-- löytyy varmasti parempikin tapa tehdä ikkunan keskitys, yolo -->
+			<div id="flexUD">
+				<div id="loginwindow">
+					<div class="loginwindowTop">Käyttäjänimen valinta</div>
+					<div class="loginwindowContent">
+						<form id="formUsername" onSubmit="return false;">
+						  <label for="usernameInput">Käyttäjänimi:</label>
+							<input type="text" id="usernameInput" name="usernameInput" value="" maxlength="16"><br>
+						  <button type="button" id="loginButton">Kirjaudu</button> 
+						</form>
+					</div>
+				</div>
+				<div id="roomwindow">
+					<div class="loginwindowTop">Luo/liity huoneeseen</div>
+					<div class="loginwindowContent">
+						<form id="formRoom" onSubmit="return false;">
+							<label for="roomnameInput">Huonetunnus:</label>
+							<input type="text" id="roomnameInput" name="roomnameInput" value="" maxlength="16"><br>
+							<label class="hide" for="passwordInput">Salasana:</label>
+							<input class="hide" type="text" id="passwordInput" name="passwordInput" value=""><br>
+							<label class="hide" for="createroomToggle">Luo uusi huone</label>
+							<input class="hide" type="checkbox" id="createroomToggle" name="createroomToggle" value=""> <br>
+							<button type="button" id="roomLoginButton">Liity</button> 
+							<button type="button" id="exitRoomLogin">Peruuta</button> 
+						</form>
+					</div>
+				</div>
+				<div id="teamSelect">
+					<div class="loginwindowTop">Valitse ryhmä
+						<button type="button" id="teamEditButton">Muokkaa Ryhmiä</button> 
+					</div>
+					<div id="teamlistWindowContent">
+						<div class="teamlistElement" id="modelTeamElement">Luo uusi ryhmä,
+								<button id="createTeamButton" type="button">Luo Ryhmä</button><br>
+								<label for="teamnameInput">Ryhmän nimi:</label>
+								<input type="text" id="teamnameInput" name="teamnameInput" value="" maxlength="16">
+							</div>
+						<div id="teamlist">
+							
+						</div>
+					</div>
+					<button type="button" id="exitTeamWindow">Peruuta</button> 
+				</div>
+				<div id="editmapdiv">
+					<div class="loginwindowTop">Muokkaa karttaa</div>
+					<div id="editmapwindowContent">
+						<table id="maplist"></table>
+					</div>
+					<button type="button" id="acceptEditButton">Hyväksy</button> 
+					<button type="button" id="cancelEditButton">Peruuta</button> 
+				</div>
+			</div>
+		</div>
+		<div id="debugmenu">
+					<form id="debugform">
+					  <label>Projection </label>
+					  <select id="projection">
+						<option value="EPSG:4326">EPSG:4326</option>
+						<option value="EPSG:3067">EPSG:3067</option>
+					  </select>
+					<form class="form-inline">
+					  <label>Geometry type &nbsp;</label>
+					  <select id="piirto">
+						<option value="None">None</option>
+						<option value="LineString">LineString</option>
+						<option value="Polygon">Polygon</option>
+						<option value="Circle">Circle</option>
+					  </select>
+					  <select id ="remove">
+					  	<option value ="remove">remove</option>
+					  	<option value ="none">None</option>
+					  </select>
+					  <button id="clear" >Clear</button> 
+					  <button id="test" type="button">test</button> 
+					  <label>
+					  	Fill
+					  </label>
+					  <input type="number" name="fillRed" >
+					  <input type="number" name="fillGreen" >
+					  <input type="number" name="fillBlue" >
+					  <input type="number" name="fillAlpha" >
+					  <label>
+					  	Stroke
+					  </label>
+					  <input type="number" name="strokeRed" >
+					  <input type="number" name="strokeGreen" >
+					  <input type="number" name="strokeBlue" >
+					  <input type="number" name="strokeAlpha" >
+					  <input type="number" name="strokeWidth" >
+					</form>
+						<div>
+						  <label>Precision </label>
+						  <input id="precision" type="number" min="0" max="12" value="4"/>
+						</div>
+					</form>
+					<div id="mouse-position"></div>
+				</div>
+		<div id="colorpickers">
+			<div id ="color-picker-container">
+				<label>Fill Color</label>
+			</div>
+			<div id ="color-picker-stroke">
+				<label>Stroke Color</label>
+			</div>
+		</div>
+		<div class="bottombar">
+			
+		
+		<div id="strokeColorDiv">
+			<label id="strokeColorPalette">Stroke color</label>
+		</div>
+		<div id="fillColorDiv">
+			<label id="fillColorPalette">Fill color</label>
+		</div>
+		<div id="linestringSettings">
+					  <label>
+					  	Stroke
+					  </label>
+					  <a id="strokeredlabel" >Red</a>
+					  <input type="number" name="colorChange" id = "strokeRed" value = "150" max ="255" min="0">
+					  <label>Green</label>
+					  <input type="number" name="colorChange" id ="strokeGreen" value = "200" max ="255" min="0">
+					  <label>Blue</label>
+					  <input type="number" name="colorChange" id = "strokeBlue" value = "250" max ="255" min="0">
+					  <label>Opacity</label>
+					  <input type="number" name="colorChange" id = "strokeAlpha" max="10" value ="10" min="0">
+					  <label>Width</label>
+					  <input type="number" name="colorChange" id = "strokeWidth" value ="7" max ="15" min="0"> 
+		</div>
+		<div id="PolyCircleSettings">
+					  <label>
+					  	Fill
+					  </label>
+					  <a>Red</a>
+					  <input type="number" name="colorChange" id="fillRed" value= "100" max ="255" min="0">
+					  <label>Green</label>
+					  <input type="number" name="colorChange" id="fillGreen" value="25" max ="255" min="0">
+					  <label>Blue</label>
+					  <input type="number" name="colorChange" id ="fillBlue" value="200" max ="255" min="0">
+					  <label>Opacity</label>
+					  <input type="number" name="colorChange" id = "fillAlpha" max="10" value ="5" min="0">
+		</div>
+			<div id="drawtools">
+				<a id="drawline">Viiva</a>
+				<a id="drawpoly">Polygoni</a>
+				<a id="drawcircle">Ympyrä</a>
+				<a id="erase">Pyyhi</a>
+				<a id="clearAll">Pyyhi kaikki</a>
+				<a id="hideAll"> Piilota/näytä piirrokset </a>
+				<a id="hideAccuracy"> Piilota/näytä Tarkkuusympyrä </a>
+			</div>
+			<div id="chatwindow">
+				<div id="chatminimize">
+					<div id="minimizeicon"></div>
+				</div>
+				<dl id="messages"></dl>
+				<hr id="line">
+				<form id="sendmessage">
+					<div id="chatInputContainer">
+						<select id="chatselect">
+							<option value="room">Huone</option>
+							<option value="group">Ryhmä</option>
+						</select>
+						<input type="text" name="message" id="messagefield" autocomplete="off"/>
+						<button type="button" id="messagesendbutton">Lähetä </button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<a href="https://www.maanmittauslaitos.fi/avoindata-lisenssi-cc40" id="licenseinfo" target="_blank"></a>
+	</div>
+	<ul id="chattesti"></ul>
+    <script type="text/javascript" src="./index.js"></script>
+  </body>
+</html>

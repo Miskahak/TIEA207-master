@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket demo</title>
+		<meta charset="utf-8">
+    </head>
+    <body>
+		<div id="logindiv">
+			<input type="text" id="unamebox">
+			<input type="checkbox" id="usekey">Use key?
+			<button type="button" id="sendlogin">send</button>
+			<p id="errmsg"></p>
+		</div>
+		<div id="chatdiv">
+			<input type="text" id="textbox">
+            <button type="button" id="sendbutton">send</button>
+            <input type="text" id="latitude">
+            <input type="text" id="longitude">
+            <button type="button" id="sendpos">send position</button>
+            <button type="button" id="senddraw">send drawing</button>
+            <button type="button" id="creategroup">Create group</button>
+            <button type="button" id="joingroup">join group</button>
+            <button type="button" id="editgroup">edit group</button>
+		</div>
+        </body>
+        <div id="chat">
+            <ul id="chattesti"></ul>
+        </div>
+        <script src="./index.js"></script>
+</html>

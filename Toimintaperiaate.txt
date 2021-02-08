@@ -1,0 +1,27 @@
+1.Puhelin ottaa yhteyden palvelimeen
+
+2.palvelin antaa puhelimelle ID:n
+
+3.Puhelin antaa palvelimelle k‰ytt‰j‰n valitseman k‰ytt‰j‰nimen
+
+4.K‰ytt‰j‰ voi luoda ryhm‰n jolloin h‰n saa ryhm‰n avaimen jonka h‰n voi jakaa muiden kanssa
+
+5.Tai h‰n voi liitty‰ jo luotuun ryhm‰‰n, t‰m‰n ryhm‰n luojalta saadulla avaimella
+
+6.Puhelin l‰hett‰‰ palvelimelle oman sijaintinsa
+
+7.Palvelin l‰hett‰‰ puhelimelle karttapohjan ja muiden sijainnit + marhdolliset merkinn‰t kartalla
+
+
+
+
+k‰ytt‰j‰ liittyy, jos h‰n ei ole jo jossain huoneessa, syˆtt‰‰ huoneen nimen sek‰ haluamansa k‰ytt‰j‰nimen + haluaako luoda uuden vai liitty‰ olemassa olevaan
+, jos huone ei ole olemassa, luo uusi huone syˆtetyll‰ nimell‰
+, jos huone on olemassa kysy salasanaa huoneeseen, lis‰‰ k‰ytt‰j‰ huoneeseen
+
+client lista roomhandler luokassa
+handlelogin ja handlelogout metodien lis‰ksi handleadduser ja handleremoveuser
+
+members dict room luokassa
+liityt‰‰n oletuksena unassigned tiimiin
+admins lista
